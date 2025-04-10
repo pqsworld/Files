@@ -1,0 +1,138 @@
+data:
+#    name: 'synthetic_shapes'
+    dataset: 'syntheticDataset_ryttl' # 'SyntheticDataset_gaussian_cv2_enhance' 'SyntheticDataset_gaussian_cv2_expand93_true_neg_bin2_kpt'
+    # dataset: 'SyntheticDataset_gaussian'
+    primitives: 'all'
+    truncate: {draw_ellipses: 0.3, draw_stripes: 0.2, gaussian_noise: 0.1}
+    cache_in_memory: true
+    suffix: 'v1'
+    add_augmentation_to_test_set: false  # set to true to evaluate with noise
+    gaussian_label:
+        enable: false
+        params:
+            GaussianBlur: {sigma: 0.2}
+    preprocessing: ## didn't do this
+        blur_size: 21
+        resize: [80, 64] # [136, 36]   # 6191:[136, 36] 6159:[160, 36]
+    augmentation:   # 数据增强
+        photometric:    # 光学上的变换
+            enable: false ## for class to recognize
+            enable_train: false # true
+            enable_val: false
+            primitives: [
+                'random_brightness', 'random_contrast', 'additive_speckle_noise',
+                'additive_gaussian_noise', 'additive_shade', 'motion_blur' ]
+            params:
+                random_brightness: {max_abs_change: 20} # 12
+                random_contrast: {strength_range: [0.85, 1.15]} # [0.6, 1.4]
+                additive_gaussian_noise: {stddev_range: [0, 15]}
+                additive_speckle_noise: {prob_range: [0, 0.0035]}
+                additive_shade:
+                    transparency_range: [-0.5, 0.8]
+                    kernel_size_range: [50, 100]
+                motion_blur: {max_kernel_size: 7}
+
+                # random_brightness: {max_abs_change: 75}
+                # random_contrast: {strength_range: [0.3, 1.8]}
+                # additive_gaussian_noise: {stddev_range: [0, 15]}
+                # additive_speckle_noise: {prob_range: [0, 0.0035]}
+                # additive_shade:
+                #     transparency_range: [-0.5, 0.8]
+                #     kernel_size_range: [50, 100]
+                # motion_blur: {max_kernel_size: 7} # origin 7
+        homographic: 
+            enable: false
+            enable_train: false
+            enable_val: false
+            params:
+                translation: true
+                rotation: true
+                scaling: true
+                perspective: false  # 透视变换
+                scaling_amplitude: 0.2
+                perspective_amplitude_x: 0.2
+                perspective_amplitude_y: 0.2
+                patch_ratio: 0.8
+                max_angle: 1.57  # 3.14
+                allow_artifacts: true
+                translation_overflow: 0.05
+            valid_border_margin: 2
+    warped_pair:        # 训练描述子（需要修改）
+        enable: true # false when training only on detector
+        params:
+            translation: true
+            rotation: true
+            scaling: true
+            perspective: true
+            scaling_amplitude: 0.05
+            perspective_amplitude_x: 0.05
+            perspective_amplitude_y: 0.05
+            patch_ratio: 1
+            max_angle: 1.57     # 3.14
+            allow_artifacts: true # true
+        valid_border_margin: 3
+
+front_end_model: 'Train_model_heatmap_cv2_alikekptangle'  # 'Train_model_heatmap_cv2_alikewithhard' 'Train_model_frontend' 'Train_model_heatmap_cv2' 'Train_model_heatmap_cv2_keynet' 'Train_model_heatmap_cv2_alike' 
+# front_end_model: 'Train_model_heatmap_cv2_fulldesc'  # 'Train_model_frontend'
+
+model:
+    # name: 'SuperPointNet_small_128_desc'    # 
+    name: 'ALikeKptAngle'    # 'KeyNet' 'SuperPointNet_small_128_fulldesc' 'ALike' 'ALikeWithHard'
+    # name: 'KeyNet'
+    # name: 'SuperPointNet_inception_128_desc'    # 
+    # name: 'SuperPointNet_small_2'    # 小模型(缩小数据量)
+    params: {
+    }
+    detector_loss:
+        loss_type: 'softmax'    # 使用softmax
+        # loss_type: 'focalloss'    # 使用softmax
+
+    batch_size:  16 # 64
+    eval_batch_size: 16
+    learning_rate: 0.001
+    kernel_reg: 0.
+    detection_threshold: 0.01 # 1/65 训练时候的阈值，精确率和召回率根据这个算的
+    nms: 3
+    lambda_loss: 0 # enable descriptor loss # 1.5   # 0   # 0.5
+    dense_loss: # 128 * 136 * 32
+        enable: true
+        self_supervised: true
+        params:
+            descriptor_dist: 4 # 4, 7.5
+            lambda_d: 800 # 800
+    sparse_loss: # 128 * 17 * 4
+        enable: false
+        params:
+            num_matching_attempts: 500
+            num_masked_non_matches_per_match: 5
+            lamda_d: 5
+            dist: 'cos'
+            method: '2d'
+    other_settings: 'train 2d, gauss 0.5'
+
+retrain: true # set true for new model true:重新训练 false:读取训练好的网络参数
+reset_iter: true # reset iterations to 0
+
+train_iter: 600000 # 200000
+tensorboard_interval: 50 # 200
+save_interval: 200 # 2000
+validation_interval: 1000 # one validation of entire val set every N training steps
+validation_size: 10
+train_show_interval: 1000 # one show of the current training from to Tensorboard every N training steps
+seed: 0
+
+# pretrained: 'logs/0923_magicpoint_synth_base/checkpoints/superPointNet_25000_checkpoint.pth.tar'
+# pretrained: 'logs/0923_superpoint_magicpoint_finger_second/checkpoints/superPointNet_35000_checkpoint.pth.tar'
+
+# pretrained: 'logs/1105_super/1105_magicpoint_synth_small_128_base/checkpoints/superPointNet_8000_checkpoint.pth.tar'
+
+# pretrained: 'logs/artificial_base/1105_magicpoint_synth_small_128_base/checkpoints/superPointNet_8000_checkpoint.pth.tar'
+# pretrained: 'logs/1215_6159out/1216_train_first/checkpoints/superPointNet_13000_checkpoint.pth.tar'
+# pretrained: 'logs/1215_6159out/1216_train_second/checkpoints/superPointNet_20000_checkpoint.pth.tar'
+
+# pretrained: 'logs/artificial_base/1105_magicpoint_synth_small_128_base/checkpoints/superPointNet_8000_checkpoint.pth.tar'
+
+# pretrained: 'logs/1217_6159out/1217_train_1/checkpoints/superPointNet_18000_checkpoint.pth.tar'
+# pretrained: 'logs/0324_newlabels_train/0331_train_bs128_afterselect_120pointlabels_focal/checkpoints/superPointNet_78400_checkpoint.pth.tar'
+
+

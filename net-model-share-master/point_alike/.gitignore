@@ -1,0 +1,9 @@
+.history/
+__pycache__/
+.vscode/
+logs/
+runs/
+datasets/pre_finger/
+datasets/pre_finger_v1/
+datasets/__pycache__/
+datasets/finger/

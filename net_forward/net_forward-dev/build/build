@@ -1,0 +1,248 @@
+#!/bin/sh
+# --- History ---
+# v1.2 refact.
+# v1.1 Support compile ARC libraries.
+# v1.0 Support compile AArch64 GCC libraries.
+# v0.9 Support compile Qualcomm LLVM QSEE4 libraries.
+# v0.8 Fix syntax error.
+# v0.7 Remove id.h after build.
+# v0.6 Generate id.h (GIT SHA1) before build.
+# v0.5 Support control compile target to same or separate directory.
+# v0.4 Compile target to separate directory.
+# v0.3 Support compile factory-test libraries.
+# v0.2 Support arm/gcc compile partial libraries.
+# v0.1 Init version
+
+
+REVERSION=1.2
+EXIT=exit
+MAKEFILE=Makefile
+BUILD_QSEE=1
+BUILD_TEE=1
+BUILD_GP=0
+BUILD_A64=0
+BUILD_ARC=0
+SAMEDIR=0
+BUILD_TEE_SEC=0
+BUILD_WINDOWS=0
+BUILD_LINUX=0
+unset ALGO_DIR
+export GCCVER=4.8
+
+#if [ ! -d output ]; then
+  mkdir -p output/tee-lib/lib32/sec_neon_x1 output/tee-lib/lib32/sec_x1 output/tee-lib/lib32/ei_neon_x1 output/tee-lib/lib32/ei_x1 output/tee-lib/lib32/neon_x1 output/tee-lib/lib32/neon_x2 output/tee-lib/lib32/x1 output/tee-lib/lib32/x2
+  mkdir -p output/tee-VIII/lib32/ei_neon_x1 output/tee-VIII/lib32/ei_x1 output/tee-VIII/lib32/neon_x1 output/tee-VIII/lib32/neon_x2 output/tee-VIII/lib32/x1 output/tee-VIII/lib32/x2
+  mkdir -p output/tee-VI/lib32/ei_neon_x1 output/tee-VI/lib32/ei_x1 output/tee-VI/lib32/neon_x1 output/tee-VI/lib32/neon_x2 output/tee-VI/lib32/x1 output/tee-VI/lib32/x2
+  mkdir -p output/tee-IX/lib32/ei_neon_x1 output/tee-IX/lib32/ei_x1 output/tee-IX/lib32/neon_x1 output/tee-IX/lib32/neon_x2 output/tee-IX/lib32/x1 output/tee-IX/lib32/x2
+  mkdir -p output/qsee/qsee1 output/qsee/qsee2 output/qsee/qsee3
+  mkdir -p output/qsee4/lib32/ei_neon_x1 output/qsee4/lib32/ei_x1 output/qsee4/lib32/neon_x1 output/qsee4/lib32/sec_neon_x1 output/qsee4/lib32/neon_x2 output/qsee4/lib32/x1 output/qsee4/lib32/x2
+  mkdir -p output/tee-lib/lib64/sec_x1 output/tee-lib/lib64/ei_x1 output/tee-lib/lib64/x1 output/tee-lib/lib64/x2
+  mkdir -p output/tee-VII/lib64/ei_x1 output/tee-VII/lib64/x1 output/tee-VII/lib64/x2
+  mkdir -p output/tee-VIII/lib64/ei_x1 output/tee-VIII/lib64/x1 output/tee-VIII/lib64/x2
+  mkdir -p output/tee-VI/lib64/ei_x1 output/tee-VI/lib64/x1 output/tee-VI/lib64/x2
+  mkdir -p output/tee-IX/lib64/ei_x1 output/tee-IX/lib64/x1 output/tee-IX/lib64/x2
+  mkdir -p output/qsee4/lib64/ei_x1 output/qsee4/lib64/x1 output/qsee4/lib64/x2 output/qsee4/lib64/sec_x1
+  mkdir -p output/windows/lib32 output/windows/lib64
+  mkdir -p output/clang13/lib64/ei_x1 output/clang13/lib64/x1 output/clang13/lib64/x2 output/clang13/lib64/x3
+  mkdir -p output/linux-lib/lib32 output/linux-lib/lib64
+
+#fioutput/linux-lib/lib64
+
+# make -f Makefile-net clean
+
+if [ -z "$MT" ]; then
+  MT=`nproc`
+fi
+
+##### TEE-LIB ### LIB32 ### NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1                              2>/dev/stdout | tee -a build-err.log &
+                        ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2                              2>/dev/stdout | tee -a build-err.log &
+                        ### EI_NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3                              2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4                              2>/dev/stdout | tee -a build-err.log &
+                        ### NEON_X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5                  2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5                  2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6                              2>/dev/stdout | tee -a build-err.log &
+                        ### SEC_NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=8                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=8                              2>/dev/stdout | tee -a build-err.log &
+                        ### SEC_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=9                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=9                              2>/dev/stdout | tee -a build-err.log &
+
+              ### LIB64 ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2                              2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4                              2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6                              2>/dev/stdout | tee -a build-err.log &
+                        ### SEC_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=9                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=9                              2>/dev/stdout | tee -a build-err.log &
+
+##### TEE-VI  ### LIB32 ### NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### NEON_X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5 GCCVER=6.3       2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5 GCCVER=6.3       2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+
+##### TEE-VI  ### LIB64 ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=6.3                   2>/dev/stdout | tee -a build-err.log &
+
+##### TEE-VII ### LIB64 ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=7.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=7.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=7.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=7.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=7.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=7.3                   2>/dev/stdout | tee -a build-err.log &
+
+##### TEE-VIII### LIB32 ### NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### NEON_X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5 GCCVER=8.3       2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5 GCCVER=8.3       2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+##### TEE-VIII### LIB64 ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=8.3                   2>/dev/stdout | tee -a build-err.log &
+
+##### TEE-IX  ### LIB32 ### NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=1 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+                        ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=2 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_NEON_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=3 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=4 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+                        ### NEON_X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5 GCCVER=9.2       2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 SENSORHUB=0 ONEDIR=0 EXT=5 GCCVER=9.2       2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=0 ONEDIR=0 EXT=6 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+##### TEE-IX  ### LIB64 ### X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=4 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=6 GCCVER=9.2                   2>/dev/stdout | tee -a build-err.log &
+
+##### QSEE4   ### LIB32 ### NEON_X1
+echo "make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=1                                 2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=1                                 2>/dev/stdout | tee -a build-err.log &
+                        ### X1
+echo "make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=2                                 2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=2                                 2>/dev/stdout | tee -a build-err.log &
+                        ### EI_NEON_X1
+echo "make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=3                                 2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=3                                 2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=4                                 2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=4                                 2>/dev/stdout | tee -a build-err.log &
+                        ### NEON_X2
+echo "make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=5                                 2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=5                                 2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=6                                 2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net CLANG=1   QSEE=1 ONEDIR=0 EXT=6                                 2>/dev/stdout | tee -a build-err.log &
+                        ### SEC_NEON_X1
+echo "make -j$MT -f Makefile-net CLANG=1   SNAPDRAGON=1 QSEE=1 ONEDIR=0 EXT=8                    2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net CLANG=1   SNAPDRAGON=1 QSEE=1 ONEDIR=0 EXT=8                    2>/dev/stdout | tee -a build-err.log &
+
+##### QSEE4   ### LIB64 ### X1
+echo "make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=2                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=2                              2>/dev/stdout | tee -a build-err.log &
+                        ### EI_X1
+echo "make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=4                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=4                              2>/dev/stdout | tee -a build-err.log &
+                        ### X2
+echo "make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=6                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=6                              2>/dev/stdout | tee -a build-err.log &
+                        ### SEC_X1
+echo "make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=9                              2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net QSEE=1    AARCH64=1 ONEDIR=0 EXT=9                              2>/dev/stdout | tee -a build-err.log &
+
+##### WINDOWS ### LIB32
+echo "make -j$MT -f Makefile-net WINDOWS=1 AARCH64=0 ONEDIR=0 EXT=10                             2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net WINDOWS=1 AARCH64=0 ONEDIR=0 EXT=10                             2>/dev/stdout | tee -a build-err.log &
+              ### LIB64
+echo "make -j$MT -f Makefile-net WINDOWS=1 AARCH64=1 ONEDIR=0 EXT=10                             2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net WINDOWS=1 AARCH64=1 ONEDIR=0 EXT=10                             2>/dev/stdout | tee -a build-err.log &
+
+##### CLANG64_13
+echo "make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=2                      2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=2                      2>/dev/stdout | tee -a build-err.log &
+
+echo "make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=4                      2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=4                      2>/dev/stdout | tee -a build-err.log &
+
+echo "make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=6                      2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=6                      2>/dev/stdout | tee -a build-err.log &
+
+echo "make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=7                      2>/dev/stdout | tee -a build-err.log &"
+make -j$MT -f Makefile-net AARCH64=1 GCCVER=clang64_13 ONEDIR=0 EXT=7                      2>/dev/stdout | tee -a build-err.log &
+
+
+wait
+exit $?
+

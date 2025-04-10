@@ -1,0 +1,32 @@
+﻿训练
+python3 train.py --dataroot ../000_data/traindata_level16 --name 6193simi_2 --model pix2pix --direction AtoB --batch_size 512  --phase train --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --init_type kaiming --ndf 4 --ngf 4 --gpu_ids=1 --dataset_mode simi
+
+python3 train.py --dataroot ../000_data/traindata_level16 --name 6193simi_3_1201 --model pix2pix --direction AtoB --batch_size 512  --phase train --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --init_type kaiming --ndf 4 --ngf 4 --gpu_ids=1 --dataset_mode simicsv
+
+newest240418:
+python3 train.py --dataroot ../000_data/traindata_level16_1116 --name 6193simi_en1_417 --model pix2pix --direction AtoB --batch_size 512  --phase train_1130 --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --init_type kaiming --ndf 4 --ngf 4 --gpu_ids=1 --dataset_mode simicsv
+
+
+光学
+241101
+python3 train.py --dataroot /hdd/file-input/zhangsn/data/000_light_simi/ --name st_simi_1101 --model pix2pix --direction AtoB --batch_size 512  --phase 0,1 --load_size_h 96 --load_size_w 96 --input_nc 2 --output_nc 1 --netG bufen5 --init_type kaiming --ndf 4 --ngf 4 --gpu_ids=1 --dataset_mode simicsvlight --display_id 0
+241215
+python3 train.py --dataroot /hdd/file-input/zhangsn/data/000_light_simi_1127add_nvwa/ --name st_simi_1209_out2_sz64_fa5_fr5_moredata_crop_teacher --model pix2pix --direction AtoB --batch_size 512  --phase train --load_size_h 64 --load_size_w 64 --input_nc 2 --output_nc 1 --netG bufen5_out2 --init_type kaiming --ndf 4 --ngf 4 --gpu_ids=1 --dataset_mode simicsvlight --out2 --display_id 0 --cropflag --teacher
+
+测试：
+1. 需要opt
+python3 test.py --dataroot ../000_data/test_level16 --name 6193simi_2 --model pix2pix --direction AtoB --batch_size 1 --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --ndf 4 --ngf 4 --epoch=300 --gpu_ids=-1 --phase=valid --dataset_mode simi
+
+python3 test.py --dataroot ../000_data/traindata_level16_1116 --name 6193simi_3_1122 --model pix2pix --direction AtoB --batch_size 1 --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --ndf 4 --ngf 4 --epoch=300 --gpu_ids=-1 --phase=valid --dataset_mode simi
+
+python3 test_frr_far.py --dataroot ../000_data/000_alldata/03transpair --name 6193simi_3_1122 --model pix2pix --direction AtoB --batch_size 1 --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --ndf 4 --ngf 4 --epoch=300 --gpu_ids=-1 --phase=valid --dataset_mode simitest
+
+python3 test_frr_far_csv.py --dataroot ../000_data/traindata_level16_1116 --name 6193simi_3_1127_2 --model pix2pix --direction AtoB --batch_size 1 --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --ndf 4 --ngf 4 --epoch=300 --gpu_ids=-1 --phase=valid_1127 --dataset_mode simicsv
+
+python3 test.py --dataroot ../000_data/000_alldata/03transpair_grid0/frr/DK4_C3U/train --name 6193simi_3_1127_2 --model pix2pix --direction AtoB --batch_size 1 --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --ndf 4 --ngf 4 --epoch=300 --gpu_ids=-1 --phase=6193-DK4-150-mul8-base --dataset_mode simitest
+
+python3 test.py --dataroot /data/guest/simi_data/test/ --name 6193simi_3_1130_2 --model pix2pix --direction AtoB --batch_size 1 --load_size_h 61 --load_size_w 18 --input_nc 2 --output_nc 1 --netG bufen5 --ndf 4 --ngf 4 --epoch=300 --gpu_ids=-1 --phase=bad_cases --dataset_mode simitest
+
+2.直接遍历数据
+test_read_csv.py 直接读csv测试
+test_fa.py test_fr.py直接读图测试

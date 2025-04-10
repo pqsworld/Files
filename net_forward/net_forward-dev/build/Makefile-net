@@ -1,0 +1,141 @@
+TARGET_NAME=libsilfp_algo_net
+
+COMMON_CFLAGS=
+
+include depends.mak
+$(shell mkdir -p output_object/$(CUST)/$(PROJECT)/$(TARGET))
+LOCAL_BASE_PATH:=..
+NET_PATH:= ../net
+
+ifeq ($(BASE_DIR),)
+BASE_DIR=../../../fp-hal/libsl_fp_nosec/core
+endif
+
+#-I. -I./include -I./include/cust
+INCLUDES+=  -I$(LOCAL_BASE_PATH)/net
+# mods := spoof spd mistouch exp enhance patch quality mask
+# ofiles := $(foreach  n,$(names), net_$(mods)_$(PROJECT).o)
+
+CHIP=$(subst PROJECT_,,$(PROJECT))
+
+#若为全编 收录*6193.o 若为单编 收录net_exp_6193.o
+cfiles := $(wildcard $(NET_PATH)/$(PROJECT)/*.c)
+# ofiles := $(cfiles: .c=.o)
+ofiles := $(patsubst %.c,%.o,$(cfiles))
+ifneq ($(MODULE),net)
+ ofiles := $(LOCAL_BASE_PATH)/net/$(CHIP)/net_$(MODULE).o
+endif
+
+
+objects_common = \
+	$(LOCAL_BASE_PATH)/net/SL_Math.o\
+	$(LOCAL_BASE_PATH)/net/net_cnn_common.o\
+	$(LOCAL_BASE_PATH)/net/$(CHIP)/alog.o\
+    $(LOCAL_BASE_PATH)/net/block_function.o\
+	# $(LOCAL_BASE_PATH)/net/android.o\
+
+
+ifeq ($(PROJECT),PROJECT_SQUARE)
+ INCLUDES+=  -I$(LOCAL_BASE_PATH)/net/6135
+ #echo "square not support net"
+ objects1 += \
+    $(LOCAL_BASE_PATH)/net/6135/alog.o\
+ 	$(LOCAL_BASE_PATH)/net/6135/net_spoof.o\
+ 	$(LOCAL_BASE_PATH)/net/6135/net_mistouch.o
+endif
+ifeq ($(PROJECT),PROJECT_6157)
+ INCLUDES+=  -I$(LOCAL_BASE_PATH)/net/6157
+ objects1 += \
+    $(LOCAL_BASE_PATH)/net/6157/alog.o\
+	$(LOCAL_BASE_PATH)/net/6157/net_mistouch.o\
+	$(LOCAL_BASE_PATH)/net/6157/net_spoof.o
+endif
+ifeq ($(PROJECT),PROJECT_6159)
+ INCLUDES+=  -I$(LOCAL_BASE_PATH)/net/6159
+ objects1 += \
+    $(LOCAL_BASE_PATH)/net/6159/alog.o\
+	$(LOCAL_BASE_PATH)/net/6159/net_mistouch.o\
+ 	$(LOCAL_BASE_PATH)/net/6159/net_spoof.o
+endif
+ifeq ($(PROJECT),PROJECT_6191)
+ INCLUDES+=  -I$(LOCAL_BASE_PATH)/net/6191
+ objects1 += \
+    $(LOCAL_BASE_PATH)/net/6191/alog.o\
+	$(LOCAL_BASE_PATH)/net/6191/net_mistouch.o\
+	$(LOCAL_BASE_PATH)/net/6191/net_spoof.o
+endif
+ifeq ($(PROJECT),PROJECT_6192)
+ INCLUDES+=  -I$(LOCAL_BASE_PATH)/net/6192
+ objects1 += \
+    $(LOCAL_BASE_PATH)/net/6192/alog.o\
+	$(LOCAL_BASE_PATH)/net/6192/net_ori_enh.o\
+    $(LOCAL_BASE_PATH)/net/6192/net_patch.o\
+	$(LOCAL_BASE_PATH)/net/6192/net_spoof.o\
+	$(LOCAL_BASE_PATH)/net/6192/net_mistouch.o\
+	$(LOCAL_BASE_PATH)/net/6192/net_spd.o\
+	$(LOCAL_BASE_PATH)/net/6192/net_quality.o
+endif
+ifeq ($(PROJECT),PROJECT_6193)
+ INCLUDES+=  -I$(LOCAL_BASE_PATH)/net/6193
+ objects1 += \
+    $(LOCAL_BASE_PATH)/net/6193/alog.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_mistouch.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_spoof.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_spd.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_mask.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_enhance.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_patch.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_exp.o\
+	$(LOCAL_BASE_PATH)/net/6193/net_quality.o
+endif
+
+depend_time = \
+    build_all \
+    build \
+    Makefile-net \
+    depends.mak \
+    targets.mak
+
+ifeq ($(QSEE),1)
+
+INCLUDES += -Iinclude/services -I$(BASE_DIR)/../ta/qsee/include
+endif
+
+ifeq ($(ARMCC),1)
+
+INCLUDES += -Iinclude/services -I$(BASE_DIR)/../ta/qsee/include
+endif
+
+ifeq ($(TEE),1)
+
+CFLAGS += -DTBASE_API_LEVEL=5 -DDEBUG
+
+INCLUDES += -I$(BASE_DIR)/../ta/tee/include
+endif
+
+ifeq ($(GP),1)
+
+CFLAGS += -DTBASE_API_LEVEL=5 -DDEBUG
+
+INCLUDES += -I$(BASE_DIR)/../ta/gp/include
+endif
+
+objects += $(objects_common)
+ifneq ($(MODULE),net)
+  objects += $(ofiles)
+else
+  objects += $(objects1)
+endif
+
+include targets.mak
+
+# #测试代码段 开启时把编译任务改为打印信息  make -j1 -f Makefile-net TEE=1     AARCH64=1 ONEDIR=0 EXT=2 MODULE=mask PROJECT=PROJECT_6193 CUST=CUST_OTHER
+# all: ;
+#   # @echo "chip:$(CHIP)"
+# 	@echo "cfiles:$(cfiles)"
+# 	@echo "chip:$(CHIP)"
+# 	@echo "ofiles:$(ofiles)"
+# 	@echo "objects1:$(objects1)"
+# 	@echo "objects:$(objects)"
+# 	$(info $$objects is [${objects}])echo Hello world
+# .PHONY:all

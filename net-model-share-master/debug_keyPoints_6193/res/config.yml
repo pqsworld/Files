@@ -1,0 +1,12 @@
+border_remove: 2
+image_path: ./6193_test_img.bmp
+img_h: 122
+img_resize_h: 96
+img_resize_w: 28
+img_w: 36
+model: UnSuperPointNet_small_8_theta_student_block_v2_0814
+model_weights: ./net_result/6193/superPointNet_29700_checkpoint.pth.tar
+nms: 2
+output_dir: ./res
+testclass: get_net_pts_6193
+top_k: 130

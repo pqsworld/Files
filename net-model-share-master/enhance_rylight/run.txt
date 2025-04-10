@@ -1,0 +1,1 @@
+python3 test.py --dataroot ../../datasets/003_heben/001_hebing/001_img_debase --name newGT_sm_241 --model pix2pix --direction AtoB --batch_size 1 --load_size 128 --netG resnet_rynew241 --netD pixel --gpu_ids=7 --epoch latest --phase=test --dataset_mode=wealigned --eval --save_dir 0

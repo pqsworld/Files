@@ -1,0 +1,25 @@
+authorName: default
+experimentName: example_nni
+trialConcurrency: 1
+maxExecDuration: 120h
+maxTrialNum: 1000
+#choice: local, remote, pai
+trainingServicePlatform: local
+searchSpacePath: search_space.json
+#choice: true, false
+useAnnotation: false
+tuner:
+  #choice: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner, GPTuner
+  #SMAC (SMAC should be installed through nnictl)
+  builtinTunerName: TPE
+  classArgs:
+    #choice: maximize, minimize
+    optimize_mode: minimize
+trial:
+  command: python3 train_nni.py --dataroot ./datasets/vivo --name fast_se_bottleneck9_d4_g4_pix2pix --model pix2pix --direction AtoB --batch_size 256  --load_size 128 --crop_size 128 --input_nc 1 --output_nc 1 --netG self --init_type kaiming --ndf 4 --ngf 4 --gpu_ids=7
+  codeDir: .
+  gpuNum: 1
+localConfig:
+  maxTrialNumPerGpu: 1
+  useActiveGpu: true
+  gpuIndices: 7

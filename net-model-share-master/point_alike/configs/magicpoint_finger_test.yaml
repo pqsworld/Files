@@ -1,0 +1,75 @@
+data:
+    dataset: 'Finger_6159_cv2'  # test_repeatability.py
+    # dataset: 'Finger'  # test.py
+    export_folder: 'val' # train, val
+    # labels: 'datasets/pre_finger/draw_multiple_polygons/points'
+    preprocessing:
+        # resize: [160, 32]
+        resize: [128, 32]
+        # resize: [480, 640] 
+    gaussian_label:
+        enable: false # false
+        sigma: 1.
+    augmentation:   # 数据增强
+        photometric:    # 光学上的变换
+            enable: true ## for class to recognize
+            enable_train: true
+            enable_val: true
+            primitives: [
+                'random_brightness', 'random_contrast', 'additive_speckle_noise',
+                'additive_gaussian_noise', 'additive_shade', 'motion_blur' ]
+            params:
+                random_brightness: {max_abs_change: 12}
+                random_contrast: {strength_range: [0.6, 1.4]}
+                additive_gaussian_noise: {stddev_range: [0, 10]}
+                additive_speckle_noise: {prob_range: [0, 0.0035]}
+                additive_shade:
+                    transparency_range: [-0.5, 0.8]
+                    kernel_size_range: [50, 100]
+                motion_blur: {max_kernel_size: 7}
+    homography_adaptation:
+        enable: true
+        num: 1 # 100
+        aggregation: 'sum'
+        filter_counts: 0
+        homographies:
+            params:
+                translation: false
+                rotation: true
+                scaling: false
+                perspective: false
+                scaling_amplitude: 0.2
+                perspective_amplitude_x: 0.2
+                perspective_amplitude_y: 0.2
+                allow_artifacts: true
+                patch_ratio: 1
+
+# front_end_model: 'Val_model_heatmap'
+
+training:
+    workers_test: 2
+
+model:
+    # name: 'UnSuperPointNet_small_v2' # 'SuperPointNet_gauss2'
+    name: 'SuperPointNet_small_128' # UnSuperPointNet_small_v2
+    params: {
+    }    
+    batch_size: 1
+    eval_batch_size: 1
+    detection_threshold: 0.01 # 0.015
+    nms: 2
+    top_k: 500 # 点的上限
+    subpixel:
+        enable: false
+    nn_thresh: 0.7
+
+# pretrained: 'logs/1215_6159out/1216_train_first/checkpoints/superPointNet_13000_checkpoint.pth.tar'
+# pretrained: 'logs/1217_6159out/1217_train_1/checkpoints/superPointNet_18000_checkpoint.pth.tar'
+# pretrained: 'logs/1217_6159out/1217_train_2/checkpoints/superPointNet_28000_checkpoint.pth.tar'
+
+# pretrained: 'logs/FJY_onDOG/superPointNet_84400_checkpoint.pth.tar' 
+# pretrained: 'logs/DOG_train/superPointNet_40000_checkpoint.pth.tar'     # 首次DOG训练结果
+# pretrained: 'logs/0105_out/superPointNet_90000_checkpoint.pth.tar'
+pretrained: 'logs/0107_enhanceout/0111_train_enhancedata/checkpoints/superPointNet_39800_checkpoint.pth.tar'
+
+# pretrained: 'logs/superPointNet_23000_checkpoint.pth.tar'

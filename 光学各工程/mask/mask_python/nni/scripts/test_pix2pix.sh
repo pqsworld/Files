@@ -1,0 +1,3 @@
+#set -ex
+#python test.py --dataroot ./datasets/facades --name facades_pix2pix --model pix2pix --netG unet_256 --direction BtoA --dataset_mode aligned --norm batch
+python3 test.py --dataroot ./datasets/vivo/valid --name fast_bottleneck9_d4_g4_pix2pix --model pix2pix --direction AtoB --batch_size 1 --load_size 128 --crop_size 128 --input_nc 1 --output_nc 1 --netG self --ndf 4 --ngf 4 --epoch=500 --gpu_ids=-1 --phase=1

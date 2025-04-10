@@ -1,0 +1,40 @@
+data:
+    dataset: 'Finger_read_H_2imgs'  # 36->32 裁剪
+    # dataset: 'Finger_read_H_2imgs_DOG'  # 
+    export_folder: 'val' # train, val
+    # labels: 'datasets/pre_finger/draw_multiple_polygons/points'
+    preprocessing:
+        # resize: [160, 36]   # enhance 传统增强32->36是扩边，非resize
+        resize: [136, 36]   # DOG 传统增强32->36是扩边，非resize
+        # resize: [480, 640] 
+
+training:
+    workers_test: 2
+
+model:
+    # name: 'UnSuperPointNet_small_v2' # 'SuperPointNet_gauss2'
+    name: 'SuperPointNet_small_128' # UnSuperPointNet_small_v2
+    params: {
+    }    
+    batch_size: 1
+    eval_batch_size: 1
+    detection_threshold: 0.01 # 0.015
+    nms: 2
+    top_k: 500 # 点的上限
+    subpixel:
+        enable: false
+    nn_thresh: 0.7
+
+# pretrained: 'logs/09_01_magicpoint_synth_256C_Focal_60/checkpoints/superPointNet_49600_checkpoint.pth.tar' # 'SuperPointNet'
+# pretrained: 'logs/1022_super/1022_magicpoint_synth_base/checkpoints/superPointNet_20000_checkpoint.pth.tar'
+# pretrained: 'logs/1027_super/1027_superpoint_magicpoint_finger_third/checkpoints/superPointNet_35000_checkpoint.pth.tar'
+# pretrained: 'logs/1105_super/1105_superpoint_magicpoint_finger_second/checkpoints/superPointNet_18000_checkpoint.pth.tar'
+
+# pretrained: 'logs/1202_super/1202_train_/checkpoints/superPointNet_200000_checkpoint.pth.tar'   #首次增强图训练：6159_1201_remove
+# pretrained: 'logs/DOG_train/superPointNet_40000_checkpoint.pth.tar'     # 首次DOG训练结果
+# pretrained: 'logs/DOG_train/superPointNet_58000_checkpoint.pth.tar' 
+# pretrained: 'logs/self_train/superPointNet_26000_checkpoint.pth.tar'        # superpoint自监督方式
+
+# pretrained: 'logs/FJY_onDOG/superPointNet_84400_checkpoint.pth.tar'     # 最新DOG训练结果
+
+pretrained: 'logs/0107_enhanceout/0111_train_enhancedata/checkpoints/superPointNet_39800_checkpoint.pth.tar'    # 新增强数据训练

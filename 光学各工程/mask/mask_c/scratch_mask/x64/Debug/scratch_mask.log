@@ -1,0 +1,10 @@
+﻿E:\visual studio 2022\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1101,5): warning MSB8027: 名为 cnn_function.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 ..\..\public_code\cnn_function.cpp, ..\scratch_mask_code\cnn_function.cpp。
+x64\Debug\cnn_function.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+    正在创建库 F:\yey\work\C_C++code\scratch_mask\x64\Debug\scratch_mask.lib 和对象 F:\yey\work\C_C++code\scratch_mask\x64\Debug\scratch_mask.exp
+cnn_arm_neon.obj : error LNK2019: 无法解析的外部符号 "int __cdecl alignPtr(int,int)" (?alignPtr@@YAHHH@Z)，函数 "struct Mat __cdecl bottleneck(struct Mat,struct bottleneck_se_block *)" (?bottleneck@@YA?AUMat@@U1@PEAUbottleneck_se_block@@@Z) 中引用了该符号
+    已定义且可能匹配的符号上的提示:
+      "unsigned __int64 __cdecl alignPtr(unsigned __int64,int)" (?alignPtr@@YA_K_KH@Z)
+cnn_arm_neon.obj : error LNK2019: 无法解析的外部符号 "int __cdecl bilinear_neon(struct Mat,struct Mat)" (?bilinear_neon@@YAHUMat@@U1@@Z)，函数 scratch_mask 中引用了该符号
+    已定义且可能匹配的符号上的提示:
+      "int __cdecl bilinear_neon(struct Mat,struct Mat *)" (?bilinear_neon@@YAHUMat@@PEAU1@@Z)
+F:\yey\work\C_C++code\scratch_mask\x64\Debug\scratch_mask.exe : fatal error LNK1120: 2 个无法解析的外部命令

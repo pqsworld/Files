@@ -1,0 +1,174 @@
+#!/bin/bash
+
+#cd /home/tool
+#echo "example . ./build_all all /out/"
+
+echo -e "\e[1;33;1m
+   .----------------.  .----------------.  .----------------.  .-----------------. .----------------.  .----------------.
+  | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
+  | |   _____      | || |     _____    | || |   ______     | || | ____  _____  | || |  _________   | || |  _________   | |
+  | |  |_   _|     | || |    |_   _|   | || |  |_   _ \    | || ||_   \|_   _| | || | |_   ___  |  | || | |  _   _  |  | |
+  | |    | |       | || |      | |     | || |    | |_) |   | || |  |   \ | |   | || |   | |_  \_|  | || | |_/ | | \_|  | |
+  | |    | |   _   | || |      | |     | || |    |  __'.   | || |  | |\ \| |   | || |   |  _|  _   | || |     | |      | |
+  | |   _| |__/ |  | || |     _| |_    | || |   _| |__) |  | || | _| |_\   |_  | || |  _| |___/ |  | || |    _| |_     | |
+  | |  |________|  | || |    |_____|   | || |  |_______/   | || ||_____|\____| | || | |_________|  | || |   |_____|    | |
+  | |              | || |              | || |              | || |              | || |              | || |              | |
+  | '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
+   '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'
+\e[0m"
+echo -e "\e[1;32;1m\t\t\t\t\t\t\tLIBNET 编译工具 v1.0\n\e[0m"
+echo "示例 ./build_all net 6193 "
+# 模块 all enhance exp等
+echo $1
+# 芯片
+echo $2
+# oppo 可缺省
+echo $3
+# out 可缺省
+echo $4
+
+MODULE=$1
+
+
+pro=${2,,}
+if [ "$pro" != "6157" -a "$pro" != "6159" -a "$pro" != "square" -a "$pro" != "6191" -a "$pro" != "6192" -a "$pro" != "6193" ];then
+   echo -e "\e[1;31;46m CHIP ERROR\e[0m"
+   sleep 3
+   exit 1
+fi
+PROJECT="_$pro"
+echo $PROJECT
+
+#选择编译芯片
+if [ "$pro" = "square" ]
+ then
+ PROJECT=PROJECT_SQUARE
+elif [ "$pro" = "6157" ]
+ then
+ PROJECT=PROJECT_6157
+elif [ "$pro" = "6159" ]
+ then
+ PROJECT=PROJECT_6159
+elif [ "$pro" = "6191" ]
+ then
+ PROJECT=PROJECT_6191
+elif [ "$pro" = "6192" ]
+ then
+ PROJECT=PROJECT_6192
+elif [ "$pro" = "6193" ]
+ then
+ PROJECT=PROJECT_6193
+else
+#默认6193
+ PROJECT=PROJECT_6193
+fi
+
+
+
+pro3=${3,,}
+if [ "$pro3" = "oppo" ]
+ then
+ CUST=CUST_OPPO
+else
+ CUST=CUST_OTHER
+fi
+
+PATH_BACK=$PATH
+#build
+PATH_BUILD=`pwd`
+PATH_AOSP=../../..
+#环境配置
+. /apps/ds5.sh
+. /apps/arc.sh
+. /apps/java8.sh
+
+NET_VER=`grep -w "net_ver =" ../net/$pro/alog.c |tr -cd "[0-9]"|cut -b 3-`
+echo arg_num=$#
+if [ "$3" = "no_as" ];then
+echo -e "\e[1;31m no astyle \e[0m"
+elif [ $# -eq 1 ];then
+echo -e "\e[1;31m default \e[0m"
+else
+./astyle.sh ../
+./clear_lib.sh
+fi
+#aosp
+
+cd $PATH_AOSP/
+. ./build/envsetup.sh
+lunch aosp_arm64-user
+#build
+cd -
+
+rm -f build-err.log
+
+#mkdir存放lib文件夹
+MODULE_UPPER=`echo $MODULE| tr 'a-z' 'A-Z'`
+DIR_LIBNET="$LIB$MODULE_UPPER"
+NAME_LIB=LIB_NET
+
+mkdir -p $NAME_LIB
+rm -rf $PATH_BUILD/$NAME_LIB/*
+
+#for android
+rm -r $PATH_BUILD/$NAME_LIB/android6/lib32/*
+rm -r $PATH_BUILD/$NAME_LIB/android6/lib64/*
+rm -r $PATH_BUILD/$NAME_LIB/linux-x86/lib32/*
+rm -r $PATH_BUILD/$NAME_LIB/linux-x86/lib64/*
+rm -r $PATH_BUILD/$NAME_LIB/android_memtest/lib32/*
+rm -r $PATH_BUILD/$NAME_LIB/android_memtest/lib64/*
+
+mkdir -p $PATH_BUILD/$NAME_LIB/android6/lib32
+mkdir -p $PATH_BUILD/$NAME_LIB/android6/lib64
+mkdir -p $PATH_BUILD/$NAME_LIB/linux-x86/lib32
+mkdir -p $PATH_BUILD/$NAME_LIB/linux-x86/lib64
+mkdir -p $PATH_BUILD/$NAME_LIB/android_memtest/lib32
+mkdir -p $PATH_BUILD/$NAME_LIB/android_memtest/lib64
+
+export PROJECT
+export CUST
+export MODULE
+
+echo "PATH_BUILD: $PATH_BUILD PATH_AOSP:$PATH_AOSP NAME_LIB:$NAME_LIB"
+
+
+$MT=`nproc`
+mm -j$MT 2>/dev/stdout | tee -a build-err.log
+
+cp $PATH_BUILD/$PATH_AOSP/out/target/product/generic_arm64/system/lib/libsl_fp_algo_net.so    $PATH_BUILD/$NAME_LIB/android6/lib32/
+cp $PATH_BUILD/$PATH_AOSP/out/target/product/generic_arm64/system/lib64/libsl_fp_algo_net.so  $PATH_BUILD/$NAME_LIB/android6/lib64/
+
+cp $PATH_BUILD/$PATH_AOSP/out/host/linux-x86/lib/libsl_fp_algo_net.so $PATH_BUILD/$NAME_LIB/linux-x86/lib32/
+cp $PATH_BUILD/$PATH_AOSP/out/host/linux-x86/lib64/libsl_fp_algo_net.so $PATH_BUILD/$NAME_LIB/linux-x86/lib64/
+
+cp $PATH_BUILD/$PATH_AOSP/out/host/linux-x86/lib/libsl_fp_algo_net_mem.so $PATH_BUILD/$NAME_LIB/android_memtest/lib32/
+cp $PATH_BUILD/$PATH_AOSP/out/host/linux-x86/lib64/libsl_fp_algo_net_mem.so $PATH_BUILD/$NAME_LIB/android_memtest/lib64/
+
+cp $PATH_BUILD/../net/net_api.h $PATH_BUILD/$NAME_LIB/
+
+
+echo "./build $MODULE start"
+./build $MODULE
+echo "./build $MODULE end"
+
+
+
+GIT_BRANCH=`git symbolic-ref --short HEAD`
+USER=`whoami`
+PREFIX=LIBNET_"$NET_VER"_"$MODULE"_"$USER"_"$GIT_BRANCH"_"$pro"_"$CUST"
+
+if [ ! -z "$2" ]; then
+  echo "cp_lib.sh net $PATH_BUILD $NAME_LIB $PATH_BUILD $5"
+  sh cp_lib.sh net $PATH_BUILD $NAME_LIB $PATH_BUILD $PREFIX $5
+fi
+
+PATH=$PATH_BACK
+cat build-err.log | grep -E "rror|fail" | grep -v ignore | grep -v errors | grep -v Werrors | grep -v Wno-error | grep -v frrorfarmode | grep -v "_fail"
+
+if [ $? == 0 ]
+then
+exit 0
+fi
+#cat build-err.log | grep -E "Warning|warning"
+:<<EOF
+EOF

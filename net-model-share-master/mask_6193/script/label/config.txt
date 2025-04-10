@@ -1,0 +1,3 @@
+work_dir:\hdd\file-input\wangb\mask\6193\pycode\mask\datasets\img_process\train5_3_ori_shi_result_b
+save_dir:\hdd\file-input\wangb\mask\6193\pycode\mask\datasets\img_process\train5_3_ori_shi_result_b_result
+mask_dir:\hdd\file-input\wangb\mask\6193\pycode\mask\datasets\img_process\train5_3_ori_shi_result_b_mask

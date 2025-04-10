@@ -1,0 +1,57 @@
+data:
+    # dataset: 'Finger_export'  # 'coco' 'hpatches'  Finger.py
+    dataset: 'Finger_export_6159'  # export_6159.py
+    export_folder: 'out' # train, val
+    preprocessing:
+        resize: [136, 32]
+        # resize: [480, 640] 
+    gaussian_label:
+        enable: false # false
+        sigma: 1.
+    augmentation:
+        photometric:
+            enable: false
+    homography_adaptation:
+        enable: true
+        num: 100 # 100
+        aggregation: 'sum'
+        filter_counts: 0
+        homographies:
+            params:
+                translation: true
+                rotation: true
+                scaling: true
+                perspective: true
+                scaling_amplitude: 0.2
+                perspective_amplitude_x: 0.2
+                perspective_amplitude_y: 0.2
+                allow_artifacts: true
+                patch_ratio: 1
+
+training:
+    workers_test: 2
+
+model:
+    # name: 'SuperPointNet' # 'SuperPointNet_gauss2'
+    # name: 'SuperPointNet_small' # 'SuperPointNet_gauss2'
+    name: 'SuperPointNet_small_128' # 'SuperPointNet_gauss2'
+    params: {
+    }    
+    batch_size: 1
+    eval_batch_size: 1
+    detection_threshold: 0.01 # 0.015
+    nms: 3
+    top_k: 400
+    subpixel:
+        enable: false
+
+
+# pretrained: 'logs/artificial_base/1105_magicpoint_synth_small_128_base/checkpoints/superPointNet_8000_checkpoint.pth.tar'
+# pretrained: 'logs/1215_6159out/1216_train_first/checkpoints/superPointNet_13000_checkpoint.pth.tar'
+# pretrained: 'logs/1215_6159out/1216_train_second/checkpoints/superPointNet_20000_checkpoint.pth.tar'
+# pretrained: 'logs/1215_6159out/1216_train_third/checkpoints/superPointNet_25000_checkpoint.pth.tar'
+
+# pretrained: 'logs/1217_6159out/1217_train_1/checkpoints/superPointNet_18000_checkpoint.pth.tar'
+pretrained: 'logs/1217_6159out/1217_train_2/checkpoints/superPointNet_38000_checkpoint.pth.tar'
+
+

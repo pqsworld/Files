@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="1.90"/>
+    <errors>
+        <error id="syntaxError" severity="error" msg="Code &apos;using namespace std&apos; is invalid C code. Use --std or --language to configure the language." verbose="Code &apos;using namespace std&apos; is invalid C code. Use --std or --language to configure the language.">
+            <location file="build/anycode_to_utf8/to_utf8.cpp" line="7" column="1"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting from double * to signed long long * is not portable due to different binary data representations on different platforms." verbose="Casting from double * to signed long long * is not portable due to different binary data representations on different platforms." cwe="704">
+            <location file="net/SL_Math.c" line="91" column="20"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between signed long long * and double * which have an incompatible binary data representation." verbose="Casting between signed long long * and double * which have an incompatible binary data representation." cwe="704">
+            <location file="net/SL_Math.c" line="93" column="10"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting from float * to signed int * is not portable due to different binary data representations on different platforms." verbose="Casting from float * to signed int * is not portable due to different binary data representations on different platforms." cwe="704">
+            <location file="net/SL_Math.c" line="108" column="14"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between signed int * and float * which have an incompatible binary data representation." verbose="Casting between signed int * and float * which have an incompatible binary data representation." cwe="704">
+            <location file="net/SL_Math.c" line="110" column="10"/>
+        </error>
+        <error id="duplicateBreak" severity="style" msg="Consecutive return, break, continue, goto or throw statements are unnecessary." verbose="Consecutive return, break, continue, goto or throw statements are unnecessary. The second statement can never be executed, and so should be removed." cwe="561">
+            <location file="net/SL_Math.c" line="313" column="5"/>
+        </error>
+        <error id="literalWithCharPtrCompare" severity="warning" msg="String literal compared with variable &apos;str&apos;. Did you intend to use strcmp() instead?" verbose="String literal compared with variable &apos;str&apos;. Did you intend to use strcmp() instead?" cwe="595">
+            <location file="net/test/bmp.c" line="30" column="14"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;LineBytes&apos; is assigned a value that is never used." verbose="Variable &apos;LineBytes&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/test/bmp.c" line="186" column="19"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/SL_Math.c" line="436" column="11"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;p&apos; shadows outer variable" verbose="Local variable &apos;p&apos; shadows outer variable" cwe="398">
+            <location file="net/net_cnn_common.c" line="2081" column="13" info="Shadow variable"/>
+            <location file="net/net_cnn_common.c" line="2077" column="17" info="Shadowed declaration"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;q&apos; is assigned a value that is never used." verbose="Variable &apos;q&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_cnn_common.c" line="2077" column="26"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_cnn_common.c" line="4101" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_cnn_common.c" line="4149" column="18"/>
+        </error>
+        <error id="cert-STR07-C" severity="style" msg="Use the bounds-checking interfaces strcpy_s()" verbose="Use the bounds-checking interfaces strcpy_s()">
+            <location file="net/test/bmp.c" line="24" column="13"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;img_src&apos; is always true" verbose="Condition &apos;img_src&apos; is always true" cwe="571">
+            <location file="net/test/main.c" line="781" column="10" info="Condition &apos;img_src&apos; is always true"/>
+            <location file="net/test/main.c" line="664" column="18" info="Assuming that condition &apos;img_src==NULL&apos; is not redundant"/>
+        </error>
+        <error id="resourceLeak" severity="error" msg="Resource leak: fp" verbose="Resource leak: fp" cwe="775">
+            <location file="net/test/main.c" line="191" column="9"/>
+        </error>
+        <error id="resourceLeak" severity="error" msg="Resource leak: fp" verbose="Resource leak: fp" cwe="775">
+            <location file="net/test/main.c" line="198" column="9"/>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;img_src==NULL&apos; is redundant or there is possible null pointer dereference: img_src." verbose="Either the condition &apos;img_src==NULL&apos; is redundant or there is possible null pointer dereference: img_src." cwe="476">
+            <location file="net/test/main.c" line="658" column="13" info="Null pointer dereference"/>
+            <location file="net/test/main.c" line="664" column="18" info="Assuming that condition &apos;img_src==NULL&apos; is not redundant"/>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;img_dst_exp_short==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_exp_short." verbose="Either the condition &apos;img_dst_exp_short==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_exp_short." cwe="476">
+            <location file="net/test/main.c" line="659" column="13" info="Null pointer dereference"/>
+            <location file="net/test/main.c" line="669" column="28" info="Assuming that condition &apos;img_dst_exp_short==NULL&apos; is not redundant"/>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;img_dst_exp_char==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_exp_char." verbose="Either the condition &apos;img_dst_exp_char==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_exp_char." cwe="476">
+            <location file="net/test/main.c" line="660" column="13" info="Null pointer dereference"/>
+            <location file="net/test/main.c" line="674" column="27" info="Assuming that condition &apos;img_dst_exp_char==NULL&apos; is not redundant"/>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;img_dst_mask==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_mask." verbose="Either the condition &apos;img_dst_mask==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_mask." cwe="476">
+            <location file="net/test/main.c" line="661" column="13" info="Null pointer dereference"/>
+            <location file="net/test/main.c" line="679" column="23" info="Assuming that condition &apos;img_dst_mask==NULL&apos; is not redundant"/>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;img_dst_enhance==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_enhance." verbose="Either the condition &apos;img_dst_enhance==NULL&apos; is redundant or there is possible null pointer dereference: img_dst_enhance." cwe="476">
+            <location file="net/test/main.c" line="662" column="13" info="Null pointer dereference"/>
+            <location file="net/test/main.c" line="684" column="26" info="Assuming that condition &apos;img_dst_enhance==NULL&apos; is not redundant"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between unsigned int * and float * which have an incompatible binary data representation." verbose="Casting between unsigned int * and float * which have an incompatible binary data representation." cwe="704">
+            <location file="net/test/main.c" line="604" column="28"/>
+        </error>
+        <error id="redundantAssignment" severity="style" msg="Variable &apos;descriptor_ret&apos; is reassigned a value before the old one has been used." verbose="Variable &apos;descriptor_ret&apos; is reassigned a value before the old one has been used." cwe="563">
+            <location file="net/test/main.c" line="633" column="24" info="descriptor_ret is overwritten"/>
+            <location file="net/test/main.c" line="621" column="28" info="descriptor_ret is assigned"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;descriptor_ret&apos; can be reduced." verbose="The scope of the variable &apos;descriptor_ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/test/main.c" line="607" column="9"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398">
+            <location file="net/test/main.c" line="626" column="23" info="Shadow variable"/>
+            <location file="net/test/main.c" line="610" column="15" info="Shadowed declaration"/>
+        </error>
+        <error id="literalWithCharPtrCompare" severity="warning" msg="String literal compared with variable &apos;str&apos;. Did you intend to use strcmp() instead?" verbose="String literal compared with variable &apos;str&apos;. Did you intend to use strcmp() instead?" cwe="595">
+            <location file="net/test/main.c" line="118" column="14"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;LineBytes&apos; is assigned a value that is never used." verbose="Variable &apos;LineBytes&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/test/main.c" line="279" column="19"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;patch&apos; is assigned a value that is never used." verbose="Variable &apos;patch&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/test/main.c" line="603" column="26"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;index&apos; is assigned a value that is never used." verbose="Variable &apos;index&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/test/main.c" line="608" column="15"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;descriptor_ret&apos; is assigned a value that is never used." verbose="Variable &apos;descriptor_ret&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/test/main.c" line="633" column="24"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;spoof_ret&apos; is assigned a value that is never used." verbose="Variable &apos;spoof_ret&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/test/main.c" line="753" column="15"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;finger_ret&apos; is assigned a value that is never used." verbose="Variable &apos;finger_ret&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/test/main.c" line="760" column="16"/>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: desc_hadamard" verbose="Unused variable: desc_hadamard" cwe="563">
+            <location file="net/test/main.c" line="605" column="18"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_mistouch_6193.c" line="388" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_mistouch_6193.c" line="340" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_mistouch_6191.c" line="777" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_mistouch_6191.c" line="627" column="15" info="Assuming that condition &apos;(void*)(0)==memory&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;n&apos; can be reduced." verbose="The scope of the variable &apos;n&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_mistouch_6191.c" line="592" column="16"/>
+        </error>
+        <error id="shadowFunction" severity="style" msg="Local variable &apos;new_memory&apos; shadows outer function" verbose="Local variable &apos;new_memory&apos; shadows outer function" cwe="398">
+            <location file="net/net_mistouch_6191.c" line="636" column="75" info="Shadow variable"/>
+            <location file="net/net_cnn_common.h" line="34" column="8" info="Shadowed declaration"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_mistouch_6159.c" line="777" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_mistouch_6159.c" line="627" column="15" info="Assuming that condition &apos;(void*)(0)==memory&apos; is not redundant"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6135.c" line="773" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6135.c" line="623" column="15" info="Assuming that condition &apos;(void*)(0)==memory&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;n&apos; can be reduced." verbose="The scope of the variable &apos;n&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_mistouch_6159.c" line="592" column="16"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;n&apos; can be reduced." verbose="The scope of the variable &apos;n&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_spoof_6135.c" line="588" column="16"/>
+        </error>
+        <error id="shadowFunction" severity="style" msg="Local variable &apos;new_memory&apos; shadows outer function" verbose="Local variable &apos;new_memory&apos; shadows outer function" cwe="398">
+            <location file="net/net_mistouch_6159.c" line="636" column="75" info="Shadow variable"/>
+            <location file="net/net_cnn_common.h" line="34" column="8" info="Shadowed declaration"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6191.c" line="85" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6191.c" line="86" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6191.c" line="416" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6191.c" line="535" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6191.c" line="591" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;n&apos; is assigned a value that is never used." verbose="Variable &apos;n&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6191.c" line="592" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;imsize2&apos; is assigned a value that is never used." verbose="Variable &apos;imsize2&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6191.c" line="748" column="13"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_mistouch_6135.c" line="777" column="9" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_mistouch_6135.c" line="627" column="14" info="Assuming that condition &apos;(void*)(0)==memory&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;n&apos; can be reduced." verbose="The scope of the variable &apos;n&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_mistouch_6135.c" line="592" column="16"/>
+        </error>
+        <error id="shadowFunction" severity="style" msg="Local variable &apos;new_memory&apos; shadows outer function" verbose="Local variable &apos;new_memory&apos; shadows outer function" cwe="398">
+            <location file="net/net_mistouch_6135.c" line="636" column="75" info="Shadow variable"/>
+            <location file="net/net_cnn_common.h" line="34" column="8" info="Shadowed declaration"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6159.c" line="85" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6159.c" line="86" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6159.c" line="416" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6159.c" line="535" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6159.c" line="591" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;n&apos; is assigned a value that is never used." verbose="Variable &apos;n&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6159.c" line="592" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;imsize2&apos; is assigned a value that is never used." verbose="Variable &apos;imsize2&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6159.c" line="748" column="13"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6135.c" line="81" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6135.c" line="82" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6135.c" line="412" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6135.c" line="531" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6135.c" line="587" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;n&apos; is assigned a value that is never used." verbose="Variable &apos;n&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6135.c" line="588" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;imsize2&apos; is assigned a value that is never used." verbose="Variable &apos;imsize2&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6135.c" line="744" column="13"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6135.c" line="85" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6135.c" line="86" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6135.c" line="416" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6135.c" line="535" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6135.c" line="591" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;n&apos; is assigned a value that is never used." verbose="Variable &apos;n&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6135.c" line="592" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;imsize2&apos; is assigned a value that is never used." verbose="Variable &apos;imsize2&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6135.c" line="748" column="13"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_mistouch_6157.c" line="906" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_mistouch_6157.c" line="649" column="15" info="Assuming that condition &apos;(void*)(0)==memory&apos; is not redundant"/>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;if(temp)&apos; is redundant or there is possible null pointer dereference: temp." verbose="Either the condition &apos;if(temp)&apos; is redundant or there is possible null pointer dereference: temp." cwe="476">
+            <location file="net/net_mistouch_6157.c" line="945" column="20" info="Null pointer dereference"/>
+            <location file="net/net_mistouch_6157.c" line="947" column="8" info="Assuming that condition &apos;if(temp)&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;n&apos; can be reduced." verbose="The scope of the variable &apos;n&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_mistouch_6157.c" line="614" column="16"/>
+        </error>
+        <error id="shadowFunction" severity="style" msg="Local variable &apos;new_memory&apos; shadows outer function" verbose="Local variable &apos;new_memory&apos; shadows outer function" cwe="398">
+            <location file="net/net_mistouch_6157.c" line="663" column="75" info="Shadow variable"/>
+            <location file="net/net_cnn_common.h" line="34" column="8" info="Shadowed declaration"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;i&apos; is assigned a value that is never used." verbose="Variable &apos;i&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6157.c" line="83" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6157.c" line="84" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6157.c" line="414" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6157.c" line="557" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6157.c" line="613" column="11"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;n&apos; is assigned a value that is never used." verbose="Variable &apos;n&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_mistouch_6157.c" line="614" column="18"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6159.c" line="503" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6159.c" line="455" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6159.c" line="567" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6159.c" line="525" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img&apos; can be reduced." verbose="The scope of the variable &apos;img&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_spoof_6159.c" line="384" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img_out&apos; can be reduced." verbose="The scope of the variable &apos;img_out&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_spoof_6159.c" line="385" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_spoof_6159.c" line="592" column="9"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="280" column="14"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="286" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="304" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="333" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="377" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;left&apos; is assigned a value that is never used." verbose="Variable &apos;left&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="459" column="17"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;left&apos; is assigned a value that is never used." verbose="Variable &apos;left&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="529" column="17"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6159.c" line="592" column="13"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6191.c" line="483" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6191.c" line="435" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6191.c" line="547" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6191.c" line="505" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_spoof_6191.c" line="578" column="9"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6193.c" line="496" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6193.c" line="448" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6193.c" line="560" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6193.c" line="518" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_spoof_6193.c" line="591" column="9"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6157.c" line="483" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6157.c" line="435" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_spoof_6157.c" line="547" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_spoof_6157.c" line="505" column="10" info="Assuming that condition &apos;!memory&apos; is not redundant"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_spoof_6157.c" line="578" column="9"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6191.c" line="281" column="14"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6191.c" line="287" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6191.c" line="305" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6191.c" line="334" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6191.c" line="578" column="13"/>
+        </error>
+        <error id="cert-STR07-C" severity="style" msg="Use the bounds-checking interfaces strcpy_s()" verbose="Use the bounds-checking interfaces strcpy_s()">
+            <location file="net/test/main.c" line="111" column="13"/>
+        </error>
+        <error id="cert-MSC24-C" severity="style" msg="Do not use fopen() better use fopen_s()" verbose="Do not use fopen() better use fopen_s()">
+            <location file="net/test/main.c" line="146" column="16"/>
+        </error>
+        <error id="cert-MSC24-C" severity="style" msg="Do not use fopen() better use fopen_s()" verbose="Do not use fopen() better use fopen_s()">
+            <location file="net/test/main.c" line="177" column="16"/>
+        </error>
+        <error id="cert-MSC24-C" severity="style" msg="Do not use fopen() better use fopen_s()" verbose="Do not use fopen() better use fopen_s()">
+            <location file="net/test/main.c" line="306" column="16"/>
+        </error>
+        <error id="cert-MSC24-C" severity="style" msg="Do not use fopen() better use fopen_s()" verbose="Do not use fopen() better use fopen_s()">
+            <location file="net/test/main.c" line="482" column="10"/>
+        </error>
+        <error id="cert-MSC24-C" severity="style" msg="Do not use fopen() better use fopen_s()" verbose="Do not use fopen() better use fopen_s()">
+            <location file="net/test/main.c" line="548" column="10"/>
+        </error>
+        <error id="cert-MSC24-C" severity="style" msg="Do not use fopen() better use fopen_s()" verbose="Do not use fopen() better use fopen_s()">
+            <location file="net/test/main.c" line="593" column="21"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6193.c" line="591" column="13"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6157.c" line="281" column="14"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6157.c" line="287" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6157.c" line="305" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6157.c" line="334" column="10"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_spoof_6157.c" line="578" column="13"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;memory&apos; is always true" verbose="Condition &apos;memory&apos; is always true" cwe="571">
+            <location file="net/net_enhance.c" line="11403" column="10" info="Condition &apos;memory&apos; is always true"/>
+            <location file="net/net_enhance.c" line="11295" column="15" info="Assuming that condition &apos;(void*)(0)==memory&apos; is not redundant"/>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: i" verbose="Unused variable: i" cwe="563">
+            <location file="net/net_mistouch_6159.c" line="832" column="18"/>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;if(memory)&apos; is redundant or there is possible null pointer dereference: memory." verbose="Either the condition &apos;if(memory)&apos; is redundant or there is possible null pointer dereference: memory." cwe="476">
+            <location file="net/net_enhance.c" line="11120" column="12" info="Null pointer dereference"/>
+            <location file="net/net_enhance.c" line="11197" column="8" info="Assuming that condition &apos;if(memory)&apos; is not redundant"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between signed int * and float * which have an incompatible binary data representation." verbose="Casting between signed int * and float * which have an incompatible binary data representation." cwe="704">
+            <location file="net/net_enhance.c" line="10790" column="20"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between signed int * and float * which have an incompatible binary data representation." verbose="Casting between signed int * and float * which have an incompatible binary data representation." cwe="704">
+            <location file="net/net_enhance.c" line="10791" column="19"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between signed int * and float * which have an incompatible binary data representation." verbose="Casting between signed int * and float * which have an incompatible binary data representation." cwe="704">
+            <location file="net/net_enhance.c" line="11820" column="21"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between signed int * and float * which have an incompatible binary data representation." verbose="Casting between signed int * and float * which have an incompatible binary data representation." cwe="704">
+            <location file="net/net_enhance.c" line="11873" column="21"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting from float * to signed int * is not portable due to different binary data representations on different platforms." verbose="Casting from float * to signed int * is not portable due to different binary data representations on different platforms." cwe="704">
+            <location file="net/net_enhance.c" line="11913" column="16"/>
+        </error>
+        <error id="invalidPointerCast" severity="portability" msg="Casting between signed int * and float * which have an incompatible binary data representation." verbose="Casting between signed int * and float * which have an incompatible binary data representation." cwe="704">
+            <location file="net/net_enhance.c" line="11918" column="21"/>
+        </error>
+        <error id="redundantInitialization" severity="style" msg="Redundant initialization for &apos;p&apos;. The initialized value is overwritten before it is read." verbose="Redundant initialization for &apos;p&apos;. The initialized value is overwritten before it is read." cwe="563">
+            <location file="net/net_enhance.c" line="9419" column="12" info="p is overwritten"/>
+            <location file="net/net_enhance.c" line="9417" column="11" info="p is initialized"/>
+        </error>
+        <error id="redundantInitialization" severity="style" msg="Redundant initialization for &apos;p&apos;. The initialized value is overwritten before it is read." verbose="Redundant initialization for &apos;p&apos;. The initialized value is overwritten before it is read." cwe="563">
+            <location file="net/net_enhance.c" line="10217" column="17" info="p is overwritten"/>
+            <location file="net/net_enhance.c" line="10215" column="15" info="p is initialized"/>
+        </error>
+        <error id="redundantAssignment" severity="style" msg="Variable &apos;ret&apos; is reassigned a value before the old one has been used." verbose="Variable &apos;ret&apos; is reassigned a value before the old one has been used." cwe="563">
+            <location file="net/net_enhance.c" line="11645" column="9" info="ret is overwritten"/>
+            <location file="net/net_enhance.c" line="11631" column="9" info="ret is assigned"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img&apos; can be reduced." verbose="The scope of the variable &apos;img&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="970" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img_out&apos; can be reduced." verbose="The scope of the variable &apos;img_out&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="971" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img&apos; can be reduced." verbose="The scope of the variable &apos;img&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="989" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img_out&apos; can be reduced." verbose="The scope of the variable &apos;img_out&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="990" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img&apos; can be reduced." verbose="The scope of the variable &apos;img&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="8534" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img_out&apos; can be reduced." verbose="The scope of the variable &apos;img_out&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="8535" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img&apos; can be reduced." verbose="The scope of the variable &apos;img&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="8558" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;img_out&apos; can be reduced." verbose="The scope of the variable &apos;img_out&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="8559" column="12"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;temp&apos; can be reduced." verbose="The scope of the variable &apos;temp&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file="net/net_enhance.c" line="11878" column="11"/>
+        </error>
+        <error id="funcArgNamesDifferent" severity="style" msg="Function &apos;desc_exp&apos; argument 5 names different: declaration &apos;oh&apos; definition &apos;ph&apos;." verbose="Function &apos;desc_exp&apos; argument 5 names different: declaration &apos;oh&apos; definition &apos;ph&apos;." cwe="628" inconclusive="true">
+            <location file="net/net_enhance.c" line="11204" column="92"/>
+            <location file="net/net_enhance.h" line="14" column="104"/>
+        </error>
+        <error id="funcArgNamesDifferent" severity="style" msg="Function &apos;desc_exp&apos; argument 6 names different: declaration &apos;ow&apos; definition &apos;pw&apos;." verbose="Function &apos;desc_exp&apos; argument 6 names different: declaration &apos;ow&apos; definition &apos;pw&apos;." cwe="628" inconclusive="true">
+            <location file="net/net_enhance.c" line="11204" column="106"/>
+            <location file="net/net_enhance.h" line="14" column="118"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;q&apos; shadows outer variable" verbose="Local variable &apos;q&apos; shadows outer variable" cwe="398">
+            <location file="net/net_enhance.c" line="1264" column="13" info="Shadow variable"/>
+            <location file="net/net_enhance.c" line="1254" column="9" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;q&apos; shadows outer variable" verbose="Local variable &apos;q&apos; shadows outer variable" cwe="398">
+            <location file="net/net_enhance.c" line="1280" column="13" info="Shadow variable"/>
+            <location file="net/net_enhance.c" line="1254" column="9" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;tmp&apos; shadows outer variable" verbose="Local variable &apos;tmp&apos; shadows outer variable" cwe="398">
+            <location file="net/net_enhance.c" line="11390" column="15" info="Shadow variable"/>
+            <location file="net/net_enhance.c" line="11341" column="9" info="Shadowed declaration"/>
+        </error>
+        <error id="constArgument" severity="style" msg="Argument &apos;r_w*r_h*sizeof(float)&apos; to function malloc is always 7680" verbose="Argument &apos;r_w*r_h*sizeof(float)&apos; to function malloc is always 7680" cwe="570">
+            <location file="net/net_enhance.c" line="11601" column="46" info="Argument &apos;r_w*r_h*sizeof(float)&apos; to function malloc is always 7680"/>
+            <location file="net/net_enhance.c" line="11600" column="15" info="Assignment &apos;r_w=24&apos;, assigned value is 24"/>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: i" verbose="Unused variable: i" cwe="563">
+            <location file="net/net_mistouch_6191.c" line="832" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="982" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="8527" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="8550" column="18"/>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: i" verbose="Unused variable: i" cwe="563">
+            <location file="net/net_spoof_6135.c" line="832" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;top_blob&apos; is assigned a value that is never used." verbose="Variable &apos;top_blob&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="10780" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ich&apos; is assigned a value that is never used." verbose="Variable &apos;ich&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="10819" column="13"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j&apos; is assigned a value that is never used." verbose="Variable &apos;j&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="11427" column="18"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;Q11_index&apos; is assigned a value that is never used." verbose="Variable &apos;Q11_index&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="11928" column="19"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;Q21_index&apos; is assigned a value that is never used." verbose="Variable &apos;Q21_index&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="11929" column="19"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;Q12_index&apos; is assigned a value that is never used." verbose="Variable &apos;Q12_index&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="11930" column="19"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;Q22_index&apos; is assigned a value that is never used." verbose="Variable &apos;Q22_index&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="11931" column="19"/>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: i" verbose="Unused variable: i" cwe="563">
+            <location file="net/net_mistouch_6135.c" line="832" column="18"/>
+        </error>
+        <error id="wrongPrintfScanfArgNum" severity="error" msg="printf format string requires 3 parameters but only 2 are given." verbose="printf format string requires 3 parameters but only 2 are given." cwe="685">
+            <location file="net/net_mistouch_6135.c" line="825" column="5"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;remain_outch_start&apos; is assigned a value that is never used." verbose="Variable &apos;remain_outch_start&apos; is assigned a value that is never used." cwe="563">
+            <location file="net/net_enhance.c" line="4123" column="28"/>
+        </error>
+        <error id="cert-STR05-C" severity="style" msg="Use pointers to const when referring to string literals" verbose="Use pointers to const when referring to string literals">
+            <location file="net/net_param/para_struct_enhance.h" line="11" column="24"/>
+        </error>
+        <error id="cert-STR05-C" severity="style" msg="Use pointers to const when referring to string literals" verbose="Use pointers to const when referring to string literals">
+            <location file="net/net_param/para_struct_enhance.h" line="330" column="24"/>
+        </error>
+    </errors>
+</results>

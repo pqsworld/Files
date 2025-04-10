@@ -1,0 +1,3 @@
+1.json2data.py将json文件转换为相应的png图像
+2.mask.py将对应文件夹内mask标注取出
+3.auto_mask_match.py进行部分按压图库与其对应mask拼接

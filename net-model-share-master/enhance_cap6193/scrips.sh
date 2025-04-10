@@ -1,0 +1,6 @@
+#6193en
+python3 train.py --gpu_ids 7 --lr_policy step --lr 0.01 --lr1 0.005 --name neten_e4_13  --lambda_L1 20 --lambda_L2 2  --netG resnet_416small2212 --num_d 2 --norm batch --model pix2pix --dataset_mode unaligned --dataroot /data/guest/liugq/7015cap/6193enhance/newGT  --load_sizeh 122 --load_sizew 36 --save_epoch_freq 1 --batch_size 512 --rblur --cfake
+
+python3 train.py --gpu_ids 7 --lr_policy step --lr 0.01 --lr1 0.005 --name neten_m5_30  --lambda_L1 20 --lambda_L2 2  --netG resnet_416small2212 --num_d 2 --norm batch --model pix2pix --dataset_mode unaligned --dataroot /data/guest/liugq/7015cap/6193enhance/newGT  --load_sizeh 122 --load_sizew 36 --save_epoch_freq 1 --batch_size 512
+
+python3 test.py  --model pix2pix --direction AtoB --batch_size 1 --load_sizeh 122 --load_sizew 36 --netG resnet_416small2212 --ndf 8 --ngf 8 --gpu_ids=7 --phase=test --eval --dataset_mode unaligned --dataroot /home/zhangsn/enhance/datasets/00cap/6193database/testdatasets/exp --name neten_e41_3 --epoch latest

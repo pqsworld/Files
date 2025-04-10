@@ -1,0 +1,58 @@
+sz80
+!res of acc: 0.9713936737326347
+!res of acc_fr_succ: 0.9972073725364957 fr_all_num: 12533
+!res of acc_fr_fail: 0.21164510166357617 fr_all_num: 2164
+!res of acc_fa: 0.9895070364579033 fa_all_num: 72906
+sz96
+!res of acc: 0.9750807620743582
+!res of acc_fr_succ: 0.9927391685949015 fr_all_num: 12533
+!res of acc_fr_fail: 0.14048059149722086 fr_all_num: 2164
+!res of acc_fa: 0.9968178202068403 fa_all_num: 72906
+
+1205_sz96
+!res of acc: 0.9736652854354303
+!res of acc_fr_succ: 0.9918614856778026 fr_all_num: 12533
+!res of acc_fr_fail: 0.15341959334564909 fr_all_num: 2164
+!res of acc_fa: 0.9948838230049639 fa_all_num: 72906
+
+1218_sz96
+!res of acc: 0.9691220620298392
+!res of acc_fr_succ: 0.9933774834437007 fr_all_num: 12533
+!res of acc_fr_fail: 0.17652495378927094 fr_all_num: 2164
+!res of acc_fa: 0.9884783145420116 fa_all_num: 72906
+
+1115_sz60
+!res of acc: 0.9710740499754574
+!res of acc_fr_succ: 0.9940955876485997 fr_all_num: 12533
+!res of acc_fr_fail: 0.17744916820701584 fr_all_num: 2164
+!res of acc_fa: 0.9906729212959139 fa_all_num: 72906
+
+1210_sz72:
+!res of acc: 0.9620218485668299
+!res of acc_fr_succ: 0.9988031596584935 fr_all_num: 12533
+!res of acc_fr_fail: 0.27264325323473787 fr_all_num: 2164
+!res of acc_fa: 0.9761610841357351 fa_all_num: 72906
+
+1218_sz72:
+!res of acc: 0.9716448066847025
+!res of acc_fr_succ: 0.9975265299608953 fr_all_num: 12533
+!res of acc_fr_fail: 0.20101663585951013 fr_all_num: 2164
+!res of acc_fa: 0.9900694044385908 fa_all_num: 72906
+
+
+1211_sz72_small1:
+!res of acc: 0.9669531865347077
+!res of acc_fr_succ: 0.998484002234094 fr_all_num: 12533
+!res of acc_fr_fail: 0.2305914972273461 fr_all_num: 2164
+!res of acc_fa: 0.9833895701314007 fa_all_num: 72906
+
+
+1210:
+!res of acc: 0.41004622975020394
+!res of acc_fr_succ: 0.9973354057954813 fr_all_num: 9007
+!res of acc_fr_fail: 0.0939404804589453 fr_all_num: 16734
+
+1212:
+!res of acc: 0.3833572899265763
+!res of acc_fr_succ: 0.9864549794604087 fr_all_num: 9007
+!res of acc_fr_fail: 0.0587426795745186 fr_all_num: 16734

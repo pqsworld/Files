@@ -1,0 +1,155 @@
+import copy
+from collections import deque
+from pathlib import Path
+
+import numpy as np
+import torch
+import torch.nn as nn
+
+from models.MobileNet import *
+
+pthpath = r'/hdd/share/quality/checkpoints/optic_base3/300_net_G.pth'
+pthpath = r'/hdd/share/quality/checkpoints/23-base_c160r96/1600_net_G.pth' #v2
+pthpath = r'/hdd/share/quality/checkpoints/34-base_c160r96_train7_l5b1k/1000_net_G.pth' #v2
+pthpath = r'/hdd/share/quality/checkpoints/36-re_c160r96_train7_l5b1k/1100_net_G.pth' #v2
+
+
+
+path_pth=pthpath.replace('checkpoints/','').replace('/1100','-1100').replace('.pth','.pth.h')
+
+preconv3x3_1 = ['conv3x3_pre1']
+preconv3x3_2 = ['conv3x3_pre2']
+
+dsconv3x3_1 = ['conv3x3_ds1']
+dsconv3x3_2 = ['conv3x3_ds2']
+dsconv3x3_4 = ['conv3x3_ds4']
+dsconv1x1_4 = ['conv1x1_ds4']
+ds_max = ['ds_max']
+regress = ['reconv1x1']
+
+block3 = ['conv1x1s1_di_1', 'convdw3x3s2_1', 'conv1x1s1_dd_1']
+block4 = ['convdw3x3s1_2', 'conv1x1s1_dd_2','conv1x1s1_dd_se_2', 'conv1x1s1_di_se_2']
+block2 = ['conv1x1s1_di_2', 'convdw3x3s1_2', 'conv1x1s1_dd_2',
+          'conv1x1s1_dd_se_2', 'conv1x1s1_di_se_2']
+block3_o = ['conv1x1s1_di_3', 'convdw3x3s2_3', 'conv1x1s1_dd_3',
+          'conv1x1s1_dd_se_3', 'conv1x1s1_di_se_3']
+block4_o = ['conv1x1s1_di_4', 'convdw3x3s1_4', 'conv1x1s1_dd_4',
+          'conv1x1s1_dd_se_4', 'conv1x1s1_di_se_4']
+block5 = ['conv1x1s1_di_5', 'convdw3x3s2_5', 'conv1x1s1_dd_5',
+          'conv1x1s1_dd_se_5', 'conv1x1s1_di_se_5']
+block6 = ['conv1x1s1_di_6', 'convdw3x3s1_6', 'conv1x1s1_dd_6',
+          'conv1x1s1_dd_se_6', 'conv1x1s1_di_se_6']
+block7 = ['conv1x1s1_di_7', 'convdw3x3s1_7', 'conv1x1s1_dd_7',
+          'conv1x1s1_dd_se_7', 'conv1x1s1_di_se_7']
+block8 = ['conv1x1s1_di_8', 'convdw3x3s1_8', 'conv1x1s1_dd_8',
+          'conv1x1s1_dd_se_8', 'conv1x1s1_di_se_8']
+block9 = ['conv1x1s1_di_9', 'convdw3x3s1_9', 'conv1x1s1_dd_9',
+          'conv1x1s1_dd_se_9', 'conv1x1s1_di_se_9']
+
+usfzdecon3x3_1 = ['deconv3x3_us1']
+usdecon1x1_1 = ['deconv1x1_us1']
+usdecon3x3_2 = ['deconv3x3_us2']
+usdecon3x3_3 = ['deconv3x3_us3']
+usdecon3x3_4 = ['deconv3x3_us4']
+us_upsample = ['us_upsample']
+
+postconv3x3 = ['conv3x3_post']
+
+generateconv3x3 = ['conv3x3_generate']
+
+block = [preconv3x3_1, preconv3x3_2, dsconv3x3_1, dsconv3x3_2, block3, block4, regress]
+name = []
+for i in block:
+    name.extend(i)
+
+net = MNV3_bufen_new5(1, 1, 4, n_blocks=1)
+
+net.load_state_dict(torch.load(pthpath))
+model_parameters = filter(lambda p: p.requires_grad, net.parameters())
+params = sum([np.prod(p.size()) for p in model_parameters])
+print(params)
+net.eval()
+# net.load_state_dict(torch.load(pthpath).state_dict)
+net.to('cpu')
+
+
+def list_layers(layer):
+    layers = []
+    if isinstance(layer, Block_4) or isinstance(layer, nn.Sequential) or isinstance(layer, SeModule):
+        for i in layer.children():
+            layers.extend(list_layers(i))
+    elif isinstance(layer, nn.Conv2d) or isinstance(layer, nn.BatchNorm2d) or isinstance(layer, nn.ConvTranspose2d):
+        layers.append(layer)
+    return layers
+
+
+def get_parameters_layer(net):
+    layers = []
+    queue = deque()
+    for i in net.children():
+        queue.append(i)
+    while len(queue):
+        root = queue.popleft()
+        layers.extend(list_layers(root))
+    return layers
+
+print(net)
+layers = get_parameters_layer(net)
+count = 0
+res = '#if 1\n'
+num =0
+beishu = []
+for i in range(len(layers)):
+    conv = None
+    if i + 1 < len(layers) and isinstance(layers[i], nn.Conv2d) and isinstance(layers[i + 1], nn.BatchNorm2d):
+        conv = nn.utils.fusion.fuse_conv_bn_eval(layers[i], layers[i + 1])
+    elif i + 1 < len(layers) and isinstance(layers[i], nn.ConvTranspose2d) and isinstance(layers[i + 1], nn.BatchNorm2d):
+        # print(layers[i].weight.size())
+        # print(layers[i].weight.transpose(0,1)[0,2,:,:])
+        fused_deconv = copy.deepcopy(layers[i])
+        fused_deconv.weight = torch.nn.Parameter(torch.transpose(layers[i].weight, 0, 1))
+        # print(fused_deconv.weight.size())
+        # print(fused_deconv.weight[0,2,:,:])
+        # exit()
+        conv = nn.utils.fusion.fuse_conv_bn_eval(fused_deconv, layers[i + 1])
+    elif isinstance(layers[i], nn.Conv2d):
+        conv = layers[i]
+    if conv is not None:
+        convw, convb = conv.weight.detach().numpy(
+        ).flatten(), conv.bias.detach().numpy().flatten()
+        res += 'static float para_quality_' + \
+               name[count] + \
+               '_weight[{0}] = '.format(
+                   convw.flatten().shape[0]) + '{ \n'
+        if convw.shape[0] % 8 == 0:
+            np.savetxt('param.txt', convw.reshape(-1, 8), fmt='%1.6f',
+                       delimiter='f, ', newline='f,\n')
+        else:
+            np.savetxt('param.txt', convw, fmt='%1.6f',
+                       delimiter='f, ', newline='f,\n')
+        with open('param.txt', 'r') as f:
+            res += f.read()
+        res += '};\n\n'
+
+        res += 'static float para_quality_' + \
+               name[count] + \
+               '_bias[{0}] = '.format(
+                   convb.flatten().shape[0]) + '{ \n'
+        if convb.shape[0] % 8 == 0:
+            np.savetxt('param.txt', convb.reshape(-1, 8), fmt='%1.6f',
+                       delimiter='f, ', newline='f,\n')
+        elif convb.shape[0] % 4 == 0:
+            np.savetxt('param.txt', convb.reshape(-1, 4), fmt='%1.6f',
+                       delimiter='f, ', newline='f,\n')
+        else:
+            np.savetxt('param.txt', convb, fmt='%1.10f',
+                       delimiter='f, ', newline='f,\n')
+        with open('param.txt', 'r') as f:
+            res += f.read()
+        res += '};\n\n'
+        count += 1
+
+res += '#endif\n'
+with open(path_pth, 'w') as f:
+    f.write(res)
+Path(r'param.txt').unlink()

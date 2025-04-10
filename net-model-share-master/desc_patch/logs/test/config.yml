@@ -1,0 +1,125 @@
+data:
+  add_augmentation_to_test_set: true
+  augmentation:
+    homographic:
+      enable: false
+      enable_train: false
+      enable_val: false
+      params:
+        allow_artifacts: true
+        flip: true
+        max_angle: 10
+        patch_ratio: 1
+        perspective: true
+        perspective_amplitude_x: 0.05
+        perspective_amplitude_y: 0.05
+        rotation: true
+        scaling: true
+        scaling_amplitude: 0.05
+        translation: true
+        translation_overflow: 0.05
+      valid_border_margin: 2
+    photometric:
+      enable: false
+      enable_train: false
+      enable_val: false
+      params:
+        additive_gaussian_noise:
+          stddev_range:
+          - 0
+          - 15
+        additive_shade:
+          kernel_size_range:
+          - 50
+          - 100
+          transparency_range:
+          - -0.5
+          - 0.8
+        additive_speckle_noise:
+          prob_range:
+          - 0
+          - 0.0035
+        motion_blur:
+          max_kernel_size: 7
+        random_brightness:
+          max_abs_change: 20
+        random_contrast:
+          strength_range:
+          - 0.85
+          - 1.15
+      primitives:
+      - random_brightness
+      - random_contrast
+      - additive_speckle_noise
+      - additive_gaussian_noise
+      - additive_shade
+      - motion_blur
+  cache_in_memory: true
+  dataset: Read_txt2data_92_mask_expand
+  gaussian_label:
+    enable: false
+    params:
+      GaussianBlur:
+        sigma: 0.2
+  preprocessing:
+    blur_size: 21
+    resize:
+    - 136
+    - 36
+  primitives: all
+  suffix: v1
+  truncate:
+    draw_ellipses: 0.3
+    draw_stripes: 0.2
+    gaussian_noise: 0.1
+  warped_pair:
+    enable: false
+    params:
+      allow_artifacts: true
+      max_angle: 1.57
+      patch_ratio: 0.85
+      perspective: true
+      perspective_amplitude_x: 0.2
+      perspective_amplitude_y: 0.2
+      rotation: true
+      scaling: true
+      scaling_amplitude: 0.2
+      translation: true
+    valid_border_margin: 3
+front_end_model: Train_model_heatmap_4_RL_desc_correct_sift_expand_93_new_wb
+model:
+  batch_size: 16
+  dense_loss:
+    enable: false
+    params:
+      descriptor_dist: 4
+      lambda_d: 800
+  detection_threshold: 0.5
+  detector_loss:
+    loss_type: softmax
+  eval_batch_size: 16
+  kernel_reg: 0.0
+  lambda_loss: 0
+  learning_rate: 0.001
+  name: UnSuperPointNet_small_4_RL
+  nms: 2
+  other_settings: train 2d, gauss 0.5
+  params: {}
+  sparse_loss:
+    enable: true
+    params:
+      dist: cos
+      lamda_d: 1
+      method: 2d
+      num_masked_non_matches_per_match: 100
+      num_matching_attempts: 1000
+pretrained: /data/yey/work/6191/unsuperpoint/logs/0617_1.5_4/checkpoints/superPointNet_82400_checkpoint.pth.tar
+reset_iter: true
+retrain: true
+save_interval: 400
+seed: 0
+tensorboard_interval: 200
+train_iter: 500000
+train_show_interval: 100
+validation_interval: 100
+validation_size: 10

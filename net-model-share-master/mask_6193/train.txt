@@ -1,0 +1,2 @@
+python3 train.py --dataroot ./datasets/6193 --name 6193mask_10 --model pix2pix --direction AtoB --batch_size 512  --phase train --load_size_h 80--load_size_w 24--input_nc 1 --output_nc 1 --netG bufen5 --init_type kaiming --ndf 4 --ngf 4 --gpu_ids=1
+python3 test.py --dataroot ./datasets/6193 --name 6193mask_10 --model pix2pix --direction AtoB --batch_size 1 --load_size_h 80 --load_size_w 24 --input_nc 1 --output_nc 1 --netG bufen5 --ndf 4 --ngf 4 --epoch=256 --gpu_ids=-1 --phase=valid
