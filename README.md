@@ -1,9 +1,7 @@
 _您现在位于：Test分支_
 
 [toc]
-<!-- # Net Forward [![220](https://cdn.jsdelivr.net/gh/sindresorhus/awesome@d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome#readme) -->
 
-<img src="/doc/sd.png" />
 
 _Generated from "net forward" by Stable Diffusion V2._
 
@@ -11,57 +9,15 @@ _Generated from "net forward" by Stable Diffusion V2._
 
 # Net Forward
 
-> 网络库编译项目。DL.Algo.Silead.Gigadevice.
+> 网络库编译项目
 
 本项目实现归一化的网络单独编库。主要负责编译**增强、描述子、mask、扩边、防伪、误触、异物**等深度算法库。
-合入了jenkins的自动静态扫描（cppcheck）和自动编库(CD)模块。
 
-master,dev,release分支禁止提交。
-开发人员新建分支后push远程。
-在远程申请合并(**PullRequest/MergeRequest**)
-
-申请合并后触发编库，reviewers审核后合入主干。
-版本和扫描结果保存在 **文件浏览器：\\\172.29.4.220\ftp\output**。
-
-## 1. Release History
-
-### 1.1 项目release
-
-| 版本  |   日期   | 描述                                    | 补充描述             |
-| :---: | :------: | :-------------------------------------- | -------------------- |
-| 0.0.6 | 23-02-02 | Add: spd网络 |Debug：解耦误触和防伪|
-| 0.0.5 | 23-01-11 | Add: 增加版本号结构 |Debug：修复NEON功能(enhance.c)  |
-| 0.0.4 | 22-12-20 | Debug: 修复warnings问题 |push时发送邮件给reviewer  |
-| 0.0.3 | 22-12-15 | Debug: 修改astyle, 修复编译数学库的问题 |                      |
-| 0.0.2 | 22-12-13 | ADD：增加readme文档                     | FIX: linux编译链修复 |
-| 0.0.1 | 22-12-10 | INIT：初始化                            |                      |
-
-### 1.2 算法release：主版本已更新230202002 异物/增强
-
-| 算法   |描述| 版本                       | 备注 |
-| ------ | ----     |--------------- | ---- |
-|主版本  |230202002|                  |      |
-| 描述子 | Descriptor | 23011100000   |      |
-| 增强   | Enhance    |230119302      |加round|
-| 扩边   | Exp        |23011100000    |      |
-| mask   |Mask        |23011100000    |      |
-| 误触   | Mistouch   |23011100000    |      |
-| 防伪   |Spoof       |23011100000    |      |
-| 异物   |Spd         |221219301      |      |
-| 质量   |Quality    |303239301      |      |
 
 ## 2. Struct
 
 ### 2.1 Branch
 
-* **master**
-  <u>主分支</u>，**developer提交申请后由reviewer合入**。维持公共主干，common代码有修改才会合入。
-* **dev**
-  <u>开发分支</u>，developer合入。可用于开发和编库。
-* **release**
-  <u>版本分支</u>，**developer提交申请后由reviewer合入**。用于出版本。
-* **test**
-  <u>测试分支</u>，developer合入。开发者推送后自动进jenkins测试。
 
 ### 2.2 Code
 
@@ -93,8 +49,6 @@ $ ./build_all 版本号 6193
 
 ```
 
-编译好的lib库存放在**build/out**，会自动打包为.xz文件。
-并自动复制到**guest@172.29.4.220: /LIBNET网络库文件夹**下。
 
 ----
 
@@ -116,19 +70,3 @@ $ ./main_001
 ```
 
 ## 4. Contribute/Reviewer
-
-| 描述子 | 增强   | mask | 扩边   | 防伪 | 误触 | 维护 |
-| ------ | ------ | ---- | ------ | ---- | ---- | ---- |
-| 叶杨   | 刘功琴 | 王奔 | 刘功琴 | 林杜 | 林杜 | 潘琪 |
-
-## 5. License
-
-Copyright (c) 2005-2022 **GigaDevice/Silead** Inc.
-
-All rights reserved
-
-The present software is the confidential and proprietary information of [GigaDevice](https://www.gigadevice.com/)/[Silead Inc](http://www.sileadinc.com/).
-
-You shall not disclose the present software and shall use it only in accordance with the terms of the license agreement you entered into with [GigaDevice](https://www.gigadevice.com/)/[Silead Inc](http://www.sileadinc.com/).
-
-This software may be subject to export or import laws in certain countries.
